@@ -1,5 +1,13 @@
 FROM python:3.11-slim-buster as prod
 
+# Replace ubuntu sources with mirror
+RUN sed -i 's/archive.ubuntu.com/mirrors.aliyun.com/g' /etc/apt/sources.list
+RUN sed -i 's/security.ubuntu.com/mirrors.aliyun.com/g' /etc/apt/sources.list
+
+# Replace debian sources with mirror
+RUN sed -i 's/deb.debian.org/mirrors.ustc.edu.cn/g' /etc/apt/sources.list
+RUN sed -i 's/security.debian.org/mirrors.ustc.edu.cn/g' /etc/apt/sources.list
+
 RUN apt-get update && apt-get install -y \
   default-libmysqlclient-dev \
   pkg-config \
